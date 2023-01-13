@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 dotenv.config();
+import { v4 as uuidv4 } from 'uuid';
 import { Configuration, OpenAIApi } from 'openai';
 
 const configuration = new Configuration({
@@ -34,6 +35,7 @@ app.post('/', async (req, res) => {
 
     res.status(200).send({
       bot: response.data.choices[0].text,
+      _id: uuidv4(),
     });
   } catch (error) {
     console.log(error);
